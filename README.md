@@ -78,7 +78,7 @@ API буде доступне за адресою `http://localhost:8000/`.
 
 ## Тести
 
-### Запустити тести:
+1. Запустити тести
     ```sh
     docker-compose run web python manage.py test
     ```
