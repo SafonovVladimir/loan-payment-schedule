@@ -1,6 +1,7 @@
-from .models import PaymentSchedule
-from datetime import timedelta, date
+from datetime import timedelta
 from dateutil.relativedelta import relativedelta
+
+from .models import PaymentSchedule
 
 
 def generate_payment_schedule(loan):
