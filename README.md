@@ -68,11 +68,11 @@ API буде доступне за адресою `http://localhost:8000/`.
 
 ### Зміна суми тіла платежу
 - Метод: PATCH
-- URL: `/api/schedules/<payment_id>/`
+- URL: `/api/payments/<payment_id>/modify-principal/`
 - Приклад запиту:
     ```json
     {
-        "principal": 50
+        "new_principal": 1000
     }
     ```
 
