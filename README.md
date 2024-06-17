@@ -28,29 +28,52 @@
     ```sh
     pip install -r requirements.txt
     ```
+   
+4. Налаштування змінних середовища:
+    - Створіть файл `.env` у кореневій директорії проекту.
+    - Додайте до нього ваш секретний ключ та інші необхідні змінні середовища:
+        ```
+        SECRET_KEY=your_secret_key
+        DEBUG=True  # або False в залежності від середовища
+        ```
 
 ### Міграції бази даних
-4. Застосувати міграції бази даних
+5. Застосувати міграції бази даних
     ```sh
     python manage.py makemigrations
     python manage.py migrate
     ```
 
 ### Запуск проекту
-5. Запустити сервер розробки
+6. Запустити сервер розробки
     ```sh
     python manage.py runserver
     ```
 
 ### Використання Docker
-6. Якщо ви віддаєте перевагу використанню Docker, можна скористатися Docker Compose для запуску проекту:
+7. Якщо ви віддаєте перевагу використанню Docker, можна скористатися Docker Compose для запуску проекту:
     ```sh
     docker-compose up --build
     ```
 
-API буде доступне за адресою `http://localhost:8000/`.
+API буде доступне за адресою `http://localhost:8000/api`.
 
 ## Використання
+
+### Головний екран API
+
+![screenshot](../loan-payment-schedule/loan_payment_schedule/readme_images/main_screen.png "Main_screen")
+
+### Додавання клієнтів
+
+- Метод: POST
+- URL: `/api/clients/`
+- Приклад запиту:
+    ```json
+    {
+        "name": "Myhailo Grushevsky"
+    }
+    ```
 
 ### Створення графіка платежів
 - Метод: POST
@@ -65,6 +88,12 @@ API буде доступне за адресою `http://localhost:8000/`.
         "interest_rate": 0.15
     }
     ```
+  
+### Перегляд списку платежів
+- Метод: GET
+- URL: `/api/schedules/`
+
+![screenshot](../loan-payment-schedule/loan_payment_schedule/readme_images/schedule_screen.png)
 
 ### Зміна суми тіла платежу
 - Метод: PATCH
@@ -82,3 +111,7 @@ API буде доступне за адресою `http://localhost:8000/`.
     ```sh
     docker-compose run web python manage.py test
     ```
+
+Цей README.md файл містить інформацію про налаштування змінних середовища, 
+використання `load_dotenv()` для завантаження секретних ключів та інструкції по встановленню, 
+використанню та тестуванню проекту.
