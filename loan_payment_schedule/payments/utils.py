@@ -13,11 +13,11 @@ def generate_payment_schedule(loan):
     remaining_balance = amount
 
     for i in range(1, number_of_payments + 1):
-        if periodicity.endswith('d'):
+        if periodicity.endswith("d"):
             payment_date = start_date + timedelta(days=int(periodicity[:-1]) * i)
-        elif periodicity.endswith('w'):
+        elif periodicity.endswith("w"):
             payment_date = start_date + timedelta(weeks=int(periodicity[:-1]) * i)
-        elif periodicity.endswith('m'):
+        elif periodicity.endswith("m"):
             payment_date = start_date + relativedelta(months=int(periodicity[:-1]) * i)
 
         interest = remaining_balance * (interest_rate / number_of_payments)
@@ -33,7 +33,7 @@ def generate_payment_schedule(loan):
 
 
 def recalculate_payments(loan):
-    schedules = PaymentSchedule.objects.filter(loan=loan).order_by('date')
+    schedules = PaymentSchedule.objects.filter(loan=loan).order_by("date")
     remaining_balance = loan.amount
 
     for schedule in schedules:

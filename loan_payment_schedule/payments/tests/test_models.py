@@ -1,6 +1,5 @@
-from typing import TYPE_CHECKING
-
 from django.test import TestCase
+from typing import TYPE_CHECKING
 
 if TYPE_CHECKING:
     from loan_payment_schedule.payments.models import Client
@@ -9,7 +8,7 @@ if TYPE_CHECKING:
 class ClientModelTestCase(TestCase):
 
     def test_create_client(self):
-        client_name = 'Test Client'
+        client_name = "Test Client"
         client = Client.objects.create(name=client_name)
 
         # Verify if the client was created successfully
@@ -19,7 +18,7 @@ class ClientModelTestCase(TestCase):
     def test_create_client_blank_name(self):
         # Attempt to create a client without a name
         with self.assertRaises(ValueError):
-            Client.objects.create(name='')
+            Client.objects.create(name="")
 
     def test_create_client_null_name(self):
         # Attempt to create a client with a null name
@@ -27,7 +26,7 @@ class ClientModelTestCase(TestCase):
             Client.objects.create(name=None)
 
     def test_get_client_by_name(self):
-        client_name = 'Test Client'
+        client_name = "Test Client"
         Client.objects.create(name=client_name)
 
         # Retrieve the client and verify its name
@@ -35,11 +34,11 @@ class ClientModelTestCase(TestCase):
         self.assertEqual(client.name, client_name)
 
     def test_update_client_name(self):
-        client_name = 'Test Client'
-        new_client_name = 'Updated Client'
+        client_name = "Test Client"
+        new_client_name = "Updated Client"
         client = Client.objects.create(name=client_name)
 
-        # Update the client's name and save it
+        # Update the client"s name and save it
         client.name = new_client_name
         client.save()
 
@@ -48,7 +47,7 @@ class ClientModelTestCase(TestCase):
         self.assertEqual(updated_client.name, new_client_name)
 
     def test_delete_client(self):
-        client_name = 'Test Client'
+        client_name = "Test Client"
         client = Client.objects.create(name=client_name)
 
         # Delete the client and verify it no longer exists

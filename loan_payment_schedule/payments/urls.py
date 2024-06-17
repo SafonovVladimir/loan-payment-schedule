@@ -9,7 +9,7 @@ router.register(r"loans", LoanViewSet)
 router.register(r"schedules", PaymentScheduleViewSet)
 
 custom_urlpatterns = [
-    path('payments/<int:payment_id>/modify-principal/', modify_payment_principal, name='modify_payment_principal'),
+    path("payments/<int:payment_id>/modify-principal/", modify_payment_principal, name="modify_payment_principal"),
 ]
 
 urlpatterns = [

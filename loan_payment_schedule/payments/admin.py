@@ -5,7 +5,7 @@ from .models import Client, Loan
 
 @admin.register(Client)
 class ClientAdmin(admin.ModelAdmin):
-    list_display = ['name']
+    list_display = ["name"]
 
 
 admin.site.register(Loan)

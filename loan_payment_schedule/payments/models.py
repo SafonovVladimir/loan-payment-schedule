@@ -16,7 +16,7 @@ class Loan(models.Model):
         ("3m", "3 Months"),
     ]
 
-    client = models.ForeignKey(Client, related_name='loans', on_delete=models.CASCADE)
+    client = models.ForeignKey(Client, related_name="loans", on_delete=models.CASCADE)
     amount = models.DecimalField(max_digits=10, decimal_places=2)
     loan_start_date = models.DateField()
     number_of_payments = models.IntegerField()
@@ -28,7 +28,7 @@ class Loan(models.Model):
 
 
 class PaymentSchedule(models.Model):
-    loan = models.ForeignKey(Loan, related_name='payment_schedules', on_delete=models.CASCADE)
+    loan = models.ForeignKey(Loan, related_name="payment_schedules", on_delete=models.CASCADE)
     date = models.DateField()
     principal = models.DecimalField(max_digits=10, decimal_places=2)
     interest = models.DecimalField(max_digits=10, decimal_places=2)

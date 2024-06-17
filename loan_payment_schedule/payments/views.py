@@ -47,10 +47,10 @@ class PaymentScheduleViewSet(viewsets.ViewSet):
             client_id = schedule.loan.client.id
             if client_id not in grouped_by_client:
                 grouped_by_client[client_id] = {
-                    'client_name': schedule.loan.client.name,
-                    'schedules': []
+                    "client_name": schedule.loan.client.name,
+                    "schedules": []
                 }
-            grouped_by_client[client_id]['schedules'].append(PaymentScheduleSerializer(schedule).data)
+            grouped_by_client[client_id]["schedules"].append(PaymentScheduleSerializer(schedule).data)
 
         return Response(list(grouped_by_client.values()))
 
@@ -60,7 +60,7 @@ class ScheduleDetailView(APIView):
         try:
             schedule = PaymentSchedule.objects.get(pk=payment_id)
         except PaymentSchedule.DoesNotExist:
-            return Response({'error': 'Schedule not found'}, status=status.HTTP_404_NOT_FOUND)
+            return Response({"error": "Schedule not found"}, status=status.HTTP_404_NOT_FOUND)
 
         serializer = PaymentScheduleSerializer(schedule, data=request.data, partial=True)
 
@@ -71,17 +71,17 @@ class ScheduleDetailView(APIView):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
-@api_view(['POST'])
+@api_view(["POST"])
 def modify_payment_principal(request, payment_id):
     try:
         payment = get_object_or_404(PaymentSchedule, id=payment_id)
-        new_principal = Decimal(request.data.get('new_principal', '0'))
+        new_principal = Decimal(request.data.get("new_principal", "0"))
 
         if new_principal < 0:
-            return Response({'error': 'New principal must be non-negative.'}, status=status.HTTP_400_BAD_REQUEST)
+            return Response({"error": "New principal must be non-negative."}, status=status.HTTP_400_BAD_REQUEST)
 
         if new_principal > payment.principal:
-            return Response({'error': 'New principal cannot be greater than the original principal.'},
+            return Response({"error": "New principal cannot be greater than the original principal."},
                             status=status.HTTP_400_BAD_REQUEST)
 
         # Calculate the amount reduced
@@ -94,14 +94,14 @@ def modify_payment_principal(request, payment_id):
         # Recalculate interest for the modified payment and subsequent payments
         recalculate_interests(payment.loan, payment.id, principal_reduction)
 
-        return Response({'message': 'Payment principal modified successfully.'}, status=status.HTTP_200_OK)
+        return Response({"message": "Payment principal modified successfully."}, status=status.HTTP_200_OK)
 
     except Exception as e:
-        return Response({'error': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+        return Response({"error": str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
 
 def recalculate_interests(loan, modified_payment_id, principal_reduction):
-    payments = PaymentSchedule.objects.filter(loan=loan).order_by('date')
+    payments = PaymentSchedule.objects.filter(loan=loan).order_by("date")
 
     modified_payment = None
     for payment in payments:
