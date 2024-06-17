@@ -62,7 +62,7 @@ API буде доступне за адресою `http://localhost:8000/api`.
 
 ### Головний екран API
 
-![screenshot](../main_screen.png "Main_screen")
+![screenshot](../main/loan_payment_schedule/readme_images/main_screen.png "Main_screen")
 
 ### Додавання клієнтів
 
