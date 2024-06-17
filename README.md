@@ -93,7 +93,7 @@ API буде доступне за адресою `http://localhost:8000/api`.
 - Метод: GET
 - URL: `/api/schedules/`
 
-![screenshot](../loan-payment-schedule/loan_payment_schedule/readme_images/schedule_screen.png)
+![screenshot](/loan_payment_schedule/readme_images/schedule_screen.png)
 
 ### Зміна суми тіла платежу
 - Метод: PATCH
