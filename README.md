@@ -55,8 +55,7 @@
     ```sh
     docker-compose up --build
     ```
-
-API буде доступне за адресою `http://localhost:8000/api`.
+API буде доступне за адресою `http://0.0.0.0:8081/`.
 
 ## Використання
 
@@ -67,7 +66,7 @@ API буде доступне за адресою `http://localhost:8000/api`.
 ### Додавання клієнтів
 
 - Метод: POST
-- URL: `/api/clients/`
+- URL: `/clients/`
 - Приклад запиту:
     ```json
     {
@@ -77,10 +76,11 @@ API буде доступне за адресою `http://localhost:8000/api`.
 
 ### Створення графіка платежів
 - Метод: POST
-- URL: `/api/loans/`
+- URL: `/loans/`
 - Приклад запиту:
     ```json
     {
+        "client": "Myhailo Grushevsky"
         "amount": 10000,
         "loan_start_date": "01-01-2025",
         "number_of_payments": 5,
@@ -91,26 +91,20 @@ API буде доступне за адресою `http://localhost:8000/api`.
   
 ### Перегляд списку платежів
 - Метод: GET
-- URL: `/api/schedules/`
+- URL: `/schedules/`
 
 ![screenshot](/loan_payment_schedule/readme_images/schedule_screen.png)
 
 ### Зміна суми тіла платежу
 - Метод: PATCH
-- URL: `/api/payments/<payment_id>/modify-principal/`
+- URL: `/payments/<payment_id>/modify-principal/`
 - Приклад запиту:
     ```json
     {
-        "new_principal": 1000
+        "new_principal": 10
     }
     ```
-
-## Тести
-
-1. Запустити тести
-    ```sh
-    docker-compose run web python manage.py test
-    ```
+![screenshot](/loan_payment_schedule/readme_images/modify-principal.png)
 
 Цей README.md файл містить інформацію про налаштування змінних середовища, 
 використання `load_dotenv()` для завантаження секретних ключів та інструкції по встановленню, 

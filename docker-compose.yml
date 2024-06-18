@@ -1,17 +1,25 @@
-version: '3'
+# docker-compose.yml
+
+version: '3.8'
 
 services:
   db:
-    image: sqlite:latest
+    container_name: sqlite-container
+    image: keinos/sqlite3:latest
     volumes:
       - ./data/db.sqlite3:/code/db.sqlite3
+    restart: always
 
   web:
     build: .
-    command: python manage.py runserver 0.0.0.0:8000
     volumes:
       - .:/code
+    command: >
+      sh -c "python loan_payment_schedule/manage.py migrate &&      
+             python loan_payment_schedule/manage.py runserver 0.0.0.0:8081"
     ports:
-      - "8000:8000"
+      - "8081:8081"
     depends_on:
       - db
+    environment:
+      - PYTHONPATH=/code
